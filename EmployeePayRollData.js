@@ -2,12 +2,15 @@ class EmployeePayRoll{
     id;
     salary;
     gender;
-    startDate
+    startDate;
 
-    constructor(id,name,salary){
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
+    //constructor
+    constructor(...params) {
+        this.id = params[0]
+        this.name = params[1]
+        this.salary = params[2]
+        this.gender = params[3]
+        this.startDate = params[4]
     }
     get name() { return this._name; }
     set name(name){
@@ -15,7 +18,7 @@ class EmployeePayRoll{
         this._name = name;
     }
     toString(){
-        return "id:" +this.id+"Name: "+this.name+"Salary: "+this.salary;
+        return "id:" +this.id+"Name: "+this.name+"Salary: "+this.salary +" "+"gender: "+this.gender+", StartDate: "+this.startDate;
     }
 }
 
@@ -24,3 +27,6 @@ console.log(employeePayRoll.toString());
 employeePayRoll.id = 0;
 employeePayRoll.name = "Jeff";
 console.log(employeePayRoll.toString());
+
+let newEmployeePayRollData = new EmployeePayRoll(1,"Teresa",25000,"F",new Date());
+console.log(newEmployeePayRollData.toString());
