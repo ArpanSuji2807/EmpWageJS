@@ -34,7 +34,7 @@ let empHrs = 0;
     function calcDailyWage(empHrs){
         return empHrs * WAGE_PER_HR
     }
-
+    {
     let empDailyWageArray = new Array();
     let totalEmpHrs = 0;
     let totalWorkingDays = 0;
@@ -118,7 +118,7 @@ let empHrs = 0;
     const findTotal = (totalVal,dailyVal) => {
         return totalVal + dailyVal;
     }
-    let totalHours = Array.from(empDailyHrsMap.values()).reduce(findTotal,0);
+    let totalHours = Array.from(empDailyHrsMap.values()).filter(dailyHrs => dailyHrs >0).reduce(findTotal,0);
     let totalSalary = empDailyWageArray.filter(dailyWage => dailyWage,0).reduce(findTotal,0);
     console.log("UC9 - Emp wage with Arrow: "+"Total Hours: "+totalHours+"Total wages: "+totalSalary);
 
@@ -132,5 +132,27 @@ let empHrs = 0;
     });
     console.log("Full Working days: "+fullWorkingDays);
     console.log("Part Working days: "+partWorkingDays);
-    console.log("Non Working days: "+nonWorkingDays);
+    console.log("Non Working days: "+nonWorkingDays);//UC10 -Store Day, Hours worked and Daily wage in a single object
+   }
+    let totalEmpHrs=0;
+    let totalWorkingDays=0;
+    let empDailyHrsAndWageArr=new Array();
+    while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUMBER_OF_WORKING_DAYS)
+    {
+        totalWorkingDays++;
+        let empCheck=Math.floor(Math.random() * 10) % 3;
+        let empHrs=getWorkingHrs(empCheck);
+        totalEmpHrs += empHrs;
+        empDailyHrsAndWageArr.push(
+        {
+            dayNum: totalWorkingDays,
+            dailyHours: empHrs,
+            dailyWage: calcDailyWage(empHrs),
+            toString()
+            {
+                return '\nDay' +this.dayNum+ '=> Working Hours is'+this.dailyHours+'And Wage Earned = '+this.dailyWage
+            },
+       });
+    }
+    console.log("Showing daily hours worked and wage earned: "+empDailyHrsAndWageArr);
 }
