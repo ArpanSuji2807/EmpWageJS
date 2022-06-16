@@ -155,4 +155,20 @@ let empHrs = 0;
        });
     }
     console.log("Showing daily hours worked and wage earned: "+empDailyHrsAndWageArr);
+
+    //UC 11A to 11D Using Object Functions Along With Arrow Functions
+
+    let totalWages=empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+    .reduce((totalWage,dailyHrsAndWage) =>totalWage += dailyHrsAndWage.dailyWage,0);
+     
+    let totalHours=empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+    .reduce((totalHours,dailyHrsAndWage) =>totalHours += dailyHrsAndWage.dailyHours,0);
+     
+    console.log("\nUC 11A Total Hours: "+totalHours+"Total Wages: "+totalWages);
+    process.stdout.write("\nUC 11B Logging Full Work Days")
+    empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 8).forEach(dailyHrsAndWage => process.stdout.write(dailyHrsAndWage.toString()));
+    let partWorkingDayStrArr = empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4).map(dailyHrsAndWage => dailyHrsAndWage.toString());
+    console.log("\nUC 11C PartWorkingDayStrings: "+partWorkingDayStrArr);
+    let nonWorkingDayNum=empDailyHrsAndWageArr.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==0).map(dailyHrsAndWage=>dailyHrsAndWage.dayNum);
+    console.log("\nUC 11D NonWorkingDayNums: "+nonWorkingDayNum);   
 }
